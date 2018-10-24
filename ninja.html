@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>JavaScript Sprite Animation Tutorial</title>
+	</head>
+	<body>
+		
+		<canvas id='canvas' style='background-image: url(background.jpg)'></canvas><br />
+
+		<script>
+			var canvasWidth = 1300; 
+			var canvasHeight = 500;
+			
+			var spriteWidth = 2100; 
+			var spriteHeight = 350; 
+			
+			var rows = 1; 
+			var cols = 6; 
+			
+			var trackRight = 0; 
+			var trackLeft = 0; 
+			
+			var width = spriteWidth/6; 
+			var height = spriteHeight/rows; 
+			
+			var curFrame = 0; 
+			var frameCount = 6; 
+			
+			var x=200;
+			var y=100; 
+			
+			var srcX; 
+			var srcY = 0; 
+			
+			var left = false; 
+			var right = false;
+			
+			var speed = 30; 
+			
+			var canvas = document.getElementById('canvas');
+			canvas.width = canvasWidth;
+			canvas.height = canvasHeight; 
+			
+			var ctx = canvas.getContext("2d");
+			
+			var character = new Image(); 
+			character.src = "ninja-idle.png";
+			
+			function updateFrame(){
+				curFrame = ++curFrame % frameCount; 				
+				srcX = curFrame * width; 
+				ctx.clearRect(x,y,width,height);	
+			
+			
+			}
+			
+			function draw(){
+				updateFrame();
+				ctx.drawImage(character,srcX,srcY,width,height,x,y,width,height);
+			}
+			
+			function moveLeft(){
+				left = true; 
+				right = false; 
+				frameCount = 6;
+				cols = 6;
+				character.src = "ninja-run-left.png";
+
+				x-=speed; 
+
+			}
+			
+			function moveRight(){
+				left = false;
+				right = true; 
+				frameCount = 6;
+				cols = 6;
+				character.src = "ninja-run-right.png";
+				x+=speed; 
+
+			}
+
+			function hulkAttack(){
+				character.src = "ninja-hulk.png";
+				frameCount = 7;
+				cols = 7;
+
+			}
+
+			function ninjaDashRight(){
+				character.src = "ninja-dash-right.png";
+				frameCount = 3;
+				cols = 3;
+				x+=speed + 10; 
+
+			}
+
+			function ninjaDashRight(){
+				character.src = "ninja-dash-right.png";
+				frameCount = 3;
+				cols = 3;
+				x+=speed + 10; 
+
+			}
+
+			 function ninjaDashLeft(){
+				character.src = "ninja-dash-left.png";
+				frameCount = 3;
+				cols = 3;
+				x-=speed + 10; 
+
+			 }
+
+
+			function ninjaKick(){
+				character.src = "kick.png";
+				frameCount = 5;
+				cols = 5;
+
+			}
+			
+
+			function idle(){
+				character.src = "ninja-idle.png";
+				right = false;
+				left = false;
+				frameCount = 6;
+				cols = 6;
+			}
+
+
+				function duck(){
+					character.src = "duck.png";
+					frameCount = 1;
+   			 	cols = 1;
+}
+
+
+			function jump(){
+					character.src = "jump.png";
+					frameCount = 1;
+					cols = 1;
+}
+
+			function attackTwo(){
+					character.src = "attack2.png";
+					frameCount = 7;
+					cols = 7;
+}
+
+
+
+setInterval(draw,100);
+			character.src = "ninja-idle.png";
+
+				document.addEventListener('keydown', function (e) {
+     if (e.keyCode == 39 || e.which == 39) { // Right arrow
+moveRight();
+
+		 }
+
+     if (e.keyCode == 37 || e.which == 37) { // left arrow
+moveLeft();
+
+		 } 
+
+		  if (e.keyCode == 71 || e.which == 71) { // Space
+hulkAttack();
+
+		 }
+
+
+		   if (e.keyCode == 83 || e.which == 83) { // S key
+ninjaDashRight();
+
+		 }
+
+
+		   if (e.keyCode == 65 || e.which == 65) { // A key
+ninjaDashLeft();
+
+		 }
+
+
+
+		     if (e.keyCode == 68 || e.which == 68) { // d key
+ninjaKick();
+
+		 }
+
+
+    if (e.keyCode == 40 || e.which == 40) { // down arrow
+duck();
+
+		 }
+
+
+		   if (e.keyCode == 38 || e.which == 38) { // up arrow
+jump();
+
+		 }
+
+		 		   if (e.keyCode == 70 || e.which == 70) { // f key
+attackTwo();
+
+		 }
+
+}, false);
+
+
+	
+	document.addEventListener('keyup', function (e) {
+     if (e.keyCode == 39 || e.which == 39) { // Right arrow
+idle();
+
+ }
+		 if (e.keyCode == 37 || e.which == 37) { // Right arrow
+idle();
+
+		 }
+
+ if (e.keyCode == 71 || e.which == 71) { // Right arrow
+idle();
+
+		 }
+
+		    if (e.keyCode == 83 || e.which == 83) { // Down arrow
+idle();
+
+		 }
+		 if (e.keyCode == 65 || e.which == 65) { // Down arrow
+idle();
+
+		 }
+
+		 		     if (e.keyCode == 68 || e.which == 68) { // d key
+idle();
+
+		 }
+
+		    if (e.keyCode == 40 || e.which == 40) { // down arrow
+idle();
+
+		 }
+
+		   if (e.keyCode == 38 || e.which == 38) { // up arrow
+idle();
+
+		 }
+
+		 		 		   if (e.keyCode == 70 || e.which == 70) { // f key
+idle();
+
+		 }
+
+
+
+}, false);
+
+
+
+
+
+			
+		</script>
+	</body>
+</html>
